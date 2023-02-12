@@ -4,12 +4,15 @@ import config
 
 app=Flask(__name__)
 
+# Route to home page
 @app.route("/")
 def app_home():
     return render_template("index.html")
 
+# Route to prediction page
 @app.route("/prediction" , methods=["post"])
 
+# function to get the result
 def get_species_name():
     data=request.form
     species=predict_species(data)
@@ -17,10 +20,8 @@ def get_species_name():
     #return jsonify({"result":species})
     return render_template("index.html",result=species)
 
+# code for run
 if __name__=="__main__":
     app.run(debug=True , port=config.PORT, host=config.HOST)
-
-
-
 
 
